@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+     
+{% block jumbotron %}
+ {% if not request.user.is_authenticated %}
+
+<div class="jumbotron">
+ <div class="container">
+	<div class="row">
+		<div class='col-sm-6'>
+		<h1>Student Login Application</h1>
+		<p>This is a Student Login Application project by </p>
+		<p>ANUPAM DAS 1401CS52 designed to add users to a
+database,and let them to log in using a password and log them out.</p>
+		<p>
+		<a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}" role="button">Register &raquo;</a>
+		</p>
+		</div>
+		</div>
+	</div>
+ </div>
+ {% endif %}
+{% endblock %}
+
+
+
+
+{% block content %}
+ {% if request.user.is_authenticated %}
+<h1>You are logged in!</h1>
+
+	{% if queryset %}
+	<h2>Welcome Staff</h2>
+	<table class='table'>
+	{% for instance in queryset %}
+		<tr><td>{{ forloop.counter }}</td><td>{{ instance.email }}</td><td>{{ instance.full_name }}</td><td>{{ instance.timestamp|timesince }} ago</td></tr>
+		{% if instance.email == "abc@gmail.edu" %}
+		<tr><td>is equal</td></tr>
+		{% endif %}
+	{% endfor %}
+	</table>
+
+	{% endif %}
+
+ {% else %}
+{% endif %}
+
+{% endblock %}-->
